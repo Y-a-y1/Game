@@ -53,32 +53,6 @@ p {
     width: 400px;
     margin: auto;
 }
-/* 
-
-@media (max-width:360px) {
-    #img-Main {
-        position: relative;
-    left: 21%;
-        top: 22%;
-    }
-}
-
-@media ((min-width:361px) and (max-width:1180px)) {
-    #img-Main {
-        position: relative;
-    left: 21%;
-        top: 36%;
-    }
-}
-
-@media (min-width:1181px) {
-    #img-Main {
-        position: relative;
-    left: 21%;
-        top: 20vw;
-    }
-} */
-
 
 #img-Enemy {
     position: relative;

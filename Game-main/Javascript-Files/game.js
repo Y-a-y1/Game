@@ -445,17 +445,17 @@ document.body.onkeydown = function (e) {
         moveLight()
         if (test == true) {
             moveL()
-            test = false
         }
         if (collision == true) {
             alert("collsion")
         }
-        setInterval(function () {
-            scoreboardUpdater();
-        }, 1000);
+        if (test == true) {
+            setInterval(function () {
+                scoreboardUpdater();
+            }, 1000); test = false
+        }
     }
 }
-
 function moveL() {
     document.getElementById("img-Enemy").animate([
         // keyframes
@@ -524,4 +524,31 @@ var collision = firstBB.isIntersectionBox(secondBB);
 
 if (collision == true) {
     alert("collsion")
+}
+
+x1 = 0
+y1 = 0
+w1 = 0
+h1 = 0
+x2 = 0
+y2 = 0
+w2 = 0
+h2 = 0
+function checkCollisions(x1, y1, w1, h1, x2, y2, w2, h2) {
+    if (x1 + w1 >= x2 && x1 + w1 <= x2 + w2 && y1 + h1 >= y2 && y1 + h1 <= y2 + h2) {
+        return true;
+    } else if (x1 >= x2 && x1 <= x2 + w2 && y1 >= y2 && y1 <= y2 + h2) {
+        return true;
+    } else {
+        return false;
+    }
+}
+function testIT() {
+    if (checkCollisions == true) {
+        alert("collision")
+    }
+}
+
+function pause () {
+    
 }
