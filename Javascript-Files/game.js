@@ -1,4 +1,12 @@
 
+var Score = 0
+var sec
+var movingL
+const timer = document.getElementById('Score')
+let stoptime = true
+let startTimeout
+let starttime
+const buttonChange = document.getElementById('button1')
 var L = document.getElementById("img-Enemy")
 var Light = document.getElementById("img-Main")
 var test = true
@@ -9,10 +17,12 @@ if (isPlaying == true) {
             setInterval(function () {
                 var position1 = L.getBoundingClientRect()
                 var position2 = Light.getBoundingClientRect()
-                var isColliding = checkCollisions(position1.x, position1.y, position1.width, position1.height, position2.x, position2.y, position2.width, position2.height)
+                var isColliding = checkCollisions (position2.right, position2.left, position2.top, position2.bottom, position1.right, position1.left, position1.top, position1.bottom)
                 if (isColliding == true) {
                     isPlaying = false
                     movingL.pause()
+                    stopTimer()
+                    timer.innerHTML = `YOU DIED  <br /> Your Final Score is: ${sec}`
                 }
             }, 1);
             moveLight()
@@ -20,21 +30,11 @@ if (isPlaying == true) {
             if (test == true) {
                 moveL()
                 startTimer()
+                test = false
             }
         }
     }
 }
-function checkCollisions(x1, y1, w1, h1, x2, y2, w2, h2) {
-    if (x1 + w1 >= x2 && x1 + w1 <= x2 + w2 && y1 + h1 >= y2 && y1 + h1 <= y2 + h2) {
-        return true;
-    } else if (x1 >= x2 && x1 <= x2 + w2 && y1 >= y2 && y1 <= y2 + h2) {
-        return true;
-    } else {
-        return false;
-    }
-}
-var movingL
-
 function moveL() {
     movingL = document.getElementById("img-Enemy").animate([
         // keyframes
@@ -42,14 +42,10 @@ function moveL() {
         { transform: 'translatex(-350px)' }
     ], {
         // timing options
-        duration: 3800,
+        duration: 3600,
         iterations: Infinity
     });
 }
-
-
-
-
 function moveLight() {
     document.getElementById("img-Main").animate([
         // keyframes
@@ -60,7 +56,7 @@ function moveLight() {
         { transform: 'translateY(0px)' }
     ], {
         // timing options
-        duration: 670,
+        duration: 700,
         iterations: 1
     });
 }
@@ -69,24 +65,25 @@ window.addEventListener('keydown', (e) => {
         e.preventDefault();
     }
 });
-
 function pauseGame() {
     if (isPlaying == true) {
         isPlaying = false
+        stopTimer()
         movingL.pause()
+        buttonChange.innerHTML = 'Resume'
     } else {
+        buttonChange.innerHTML = 'Pause'
         movingL.play()
+        startTimer()
         isPlaying = true
     }
 }
 function finishGame() {
     movingL.cancel()
+    resetTimer()
+    isPlaying = true
+    test = true
 }
-
-const timer = document.getElementById('Score')
-let stoptime = true;
-let startTimeout
-let starttime
 function startTimer() {
     if (stoptime == true) {
         stoptime = false
@@ -96,6 +93,7 @@ function startTimer() {
 }
 function stopTimer() {
     stopTimerCycle()
+    Score = sec
     if (stoptime == false) {
         stoptime = true;
     }
@@ -103,35 +101,26 @@ function stopTimer() {
 function timerCycle() {
     if (stoptime == false) {
         var timeSincePress = new Date().getTime() - starttime
-        sec = timeSincePress / 1000
+        sec = Score + (timeSincePress / 1000)
         sec = math(sec)
-        
-
-        
-        timer.innerHTML = sec 
-
+        timer.innerHTML =  sec
         startTimeout = setTimeout("timerCycle()", 500)
     }
 }
-
 function resetTimer() {
     stopTimerCycle()
     stopTimer()
-    timer.innerHTML = '0000'
+    timer.innerHTML = '0'
     stoptime = true
     sec = 0
-    
+    Score = 0
 }
-
 function stopTimerCycle() {
     clearTimeout(startTimeout)
 }
 function math(number) {
     return Math.floor(number)
 }
-function getFixedValue(giventime, biggerthan, addnumber) {
-    if (giventime < biggerthan) {
-        giventime = addnumber + giventime
-    }
-    return giventime
+function checkCollisions(right1,left1,top1,bottom1,right2,left2,top2,bottom2) {
+    return right1 >= left2 && left1 <= right2 && bottom1 >= top2 && top1 <= bottom2
 }

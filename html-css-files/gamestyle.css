@@ -1,11 +1,11 @@
-.button1 {
+#button1 {
     background-color: black;
     color: white;
     position: relative;
     padding: 10px 10px;
 }
 
-.button2 {
+#button2 {
     background-color: black;
     color: white;
     position: relative;
@@ -68,4 +68,8 @@ p {
 .buttons {
     width: 400px;
     margin: auto;
+}
+#Score {
+    color: white;
+    text-align: center;
 }
