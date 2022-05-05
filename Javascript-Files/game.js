@@ -21,7 +21,7 @@ function moveL(Velocity) {
     ], {
         // timing options
         duration: Velocity,
-        iterations: Infinity
+        iterations: 1
     });
 }
 function moveLight() {
@@ -110,7 +110,7 @@ if (isPlaying == true) {
                 var position1 = L.getBoundingClientRect()
                 var position2 = Light.getBoundingClientRect()
                 var isColliding = checkCollisions (position2.right, position2.left, position2.top, position2.bottom, position1.right, position1.left, position1.top, position1.bottom)
-                if (isColliding == true) {
+                if (isColliding === true) {
                     isPlaying = false
                     movingL.pause()
                     stopTimer()
@@ -118,7 +118,6 @@ if (isPlaying == true) {
                 }
             }, 1);
             moveLight()
-x--
             if (test == true) {
                 moveL(x)
                 
@@ -143,11 +142,17 @@ function createLogic2 () {
                     }
                 }, 1);
                 moveLight()
-    x--
                 if (test == true) {
                     moveL(x)
                     startTimer()
                     test = false
+                    teste2()
                 }
             }
+        }
+        function teste2() {
+while (test === false) {
+        moveL()
+        x--
+}
         }
