@@ -11,30 +11,8 @@ var L = document.getElementById("img-Enemy")
 var Light = document.getElementById("img-Main")
 var test = true
 var isPlaying = true
-if (isPlaying == true) {
-    document.body.onkeydown = function (e) {
-        if (e.keyCode == 32 && isPlaying == true) {
-            setInterval(function () {
-                var position1 = L.getBoundingClientRect()
-                var position2 = Light.getBoundingClientRect()
-                var isColliding = checkCollisions (position2.right, position2.left, position2.top, position2.bottom, position1.right, position1.left, position1.top, position1.bottom)
-                if (isColliding == true) {
-                    isPlaying = false
-                    movingL.pause()
-                    stopTimer()
-                    timer.innerHTML = `YOU DIED  <br /> Your Final Score is: ${sec}`
-                }
-            }, 1);
-            moveLight()
-
-            if (test == true) {
-                moveL()
-                startTimer()
-                test = false
-            }
-        }
-    }
-}
+    document.body.onkeydown = createLogic
+    document.getElementsByClassName('image').ontouchstart = createLogic2 
 function moveL() {
     movingL = document.getElementById("img-Enemy").animate([
         // keyframes
@@ -124,3 +102,51 @@ function math(number) {
 function checkCollisions(right1,left1,top1,bottom1,right2,left2,top2,bottom2) {
     return right1 >= left2 && left1 <= right2 && bottom1 >= top2 && top1 <= bottom2
 }
+function createLogic() {
+if (isPlaying == true) {
+    document.body.onkeydown = function (e) {
+        if (e.keyCode == 32 && isPlaying == true) {
+            setInterval(function () {
+                var position1 = L.getBoundingClientRect()
+                var position2 = Light.getBoundingClientRect()
+                var isColliding = checkCollisions (position2.right, position2.left, position2.top, position2.bottom, position1.right, position1.left, position1.top, position1.bottom)
+                if (isColliding == true) {
+                    isPlaying = false
+                    movingL.pause()
+                    stopTimer()
+                    timer.innerHTML = `YOU DIED  <br /> Your Final Score is: ${sec}`
+                }
+            }, 1);
+            moveLight()
+
+            if (test == true) {
+                moveL()
+                startTimer()
+                test = false
+            }
+        }
+    }
+}
+}
+function createLogic2 () {
+    if (isPlaying == true) {
+                setInterval(function () {
+                    var position1 = L.getBoundingClientRect()
+                    var position2 = Light.getBoundingClientRect()
+                    var isColliding = checkCollisions (position2.right, position2.left, position2.top, position2.bottom, position1.right, position1.left, position1.top, position1.bottom)
+                    if (isColliding == true) {
+                        isPlaying = false
+                        movingL.pause()
+                        stopTimer()
+                        timer.innerHTML = `YOU DIED  <br /> Your Final Score is: ${sec}`
+                    }
+                }, 1);
+                moveLight()
+    
+                if (test == true) {
+                    moveL()
+                    startTimer()
+                    test = false
+                }
+            }
+        }
