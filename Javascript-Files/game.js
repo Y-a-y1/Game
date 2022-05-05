@@ -12,7 +12,7 @@ var Light = document.getElementById("img-Main")
 var test = true
 var isPlaying = true
     document.body.onkeydown = createLogic
-    document.getElementsByClassName('image').ontouchstart = createLogic2 
+    document.getElementById('imageId').ontouchstart = createLogic2 
 function moveL() {
     movingL = document.getElementById("img-Enemy").animate([
         // keyframes
