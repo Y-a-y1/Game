@@ -1,4 +1,4 @@
-
+var x = 3600
 var Score = 0
 var sec
 var movingL
@@ -11,16 +11,16 @@ var L = document.getElementById("img-Enemy")
 var Light = document.getElementById("img-Main")
 var test = true
 var isPlaying = true
-    document.body.onkeydown = createLogic
-    document.getElementById('imageId').ontouchstart = createLogic2 
-function moveL() {
+document.body.onkeydown = createLogic 
+document.getElementById('imageId').ontouchstart = createLogic2 
+function moveL(Velocity) {
     movingL = document.getElementById("img-Enemy").animate([
         // keyframes
         { transform: 'translatex(0px)' },
         { transform: 'translatex(-350px)' }
     ], {
         // timing options
-        duration: 3600,
+        duration: Velocity,
         iterations: Infinity
     });
 }
@@ -118,9 +118,10 @@ if (isPlaying == true) {
                 }
             }, 1);
             moveLight()
-
+x--
             if (test == true) {
-                moveL()
+                moveL(x)
+                
                 startTimer()
                 test = false
             }
@@ -142,9 +143,9 @@ function createLogic2 () {
                     }
                 }, 1);
                 moveLight()
-    
+    x--
                 if (test == true) {
-                    moveL()
+                    moveL(x)
                     startTimer()
                     test = false
                 }
