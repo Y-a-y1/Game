@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+    <img id="test" src='https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/8d4a5cc1-1b07-4abf-8626-4388cd5c57a7/d7qunxk-2915eeb7-e2f6-4d01-8603-c8ce94226618.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzhkNGE1Y2MxLTFiMDctNGFiZi04NjI2LTQzODhjZDVjNTdhN1wvZDdxdW54ay0yOTE1ZWViNy1lMmY2LTRkMDEtODYwMy1jOGNlOTQyMjY2MTgucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.XFPgNvLidomu014zIxfRPb0ua1c1drt6nndaPNZ1B18'/>
+
+    <script>
+        const initialVelocity = 4000
+        const velocityStep = 500
+
+        let velocity = initialVelocity
+
+        let x = document.getElementById('test').animate([
+            { transform: 'translateX(0) ' },
+            { transform: 'translateX(400px) ' },
+        ],
+            {
+                duration: velocity,
+                iterations: Infinity,
+            }
+        )
+        function test(){
+            console.log('Setting timeout')
+            setTimeout(function (){
+                if(velocity > velocityStep){
+                    velocity -= velocityStep
+                    console.log('Reduce velocity: ', velocity)
+                    x = document.getElementById('test').animate([
+                            { transform: 'translateX(0) ' },
+                            { transform: 'translateX(400px) ' },
+                        ],
+                            {
+                                duration: velocity,
+                                iterations: Infinity,
+                            }
+                        )
+                    test()
+                }
+            }, velocity)
+        }
+        test()
+    </script>
+</body>
+</html>

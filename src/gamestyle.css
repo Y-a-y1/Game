@@ -69,7 +69,9 @@ p {
     width: 400px;
     margin: auto;
 }
-#Score {
+#score {
     color: white;
     text-align: center;
+    margin-left: 280px;
 }
+
